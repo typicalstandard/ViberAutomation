@@ -30,3 +30,11 @@ class CheckableComboBox(QComboBox):
             pass
 
 
+class CheckableComboBoxDelegate(QStyledItemDelegate):
+    def paint(self, painter, option, index):
+        item = index.model().itemFromIndex(index)
+        if item.checkState() == Qt.Checked:
+            option.state |= QStyle.State_On
+        else:
+            option.state |= QStyle.State_Off
+        QStyledItemDelegate.paint(self, painter, option, index)
