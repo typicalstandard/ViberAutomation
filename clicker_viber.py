@@ -10,7 +10,7 @@ class ViberAutomation:
         self.dlg = None
 
     @staticmethod
-    def select(count=7, cord_x=1600, cord_y=310, scroll=-350):
+    def click_side_panel(count=7, cord_x=1600, cord_y=310, scroll=-350):
         for i in range(1, count):
             time.sleep(1)
             s = 100
@@ -46,17 +46,17 @@ class ViberAutomation:
         pyautogui.click(1600, 330, button='right')
         self.dlg.child_window(title="Выбрать", control_type="MenuItem").wait('ready', timeout=15).click_input()
         if count_post < 8:
-            self.select(count=count_post,scroll=0)
+            self.click_side_panel(count=count_post,scroll=0)
         else:
             for i in range(count_post // 7):
                 if i == 0:
-                    self.select()
+                    self.click_side_panel()
                 else:
-                    self.select(count=8, cord_x=1600, cord_y=180, scroll=-335)
+                    self.click_side_panel(count=8, cord_x=1600, cord_y=180, scroll=-335)
             if count_post % 7 != 0:
-                self.select(count=(count_post % 7) + 1, cord_x=1600, cord_y=180, scroll=0)
+                self.click_side_panel(count=(count_post % 7) + 1, cord_x=1600, cord_y=180, scroll=0)
 
-    def post_messages(self,group):
+    def send_message_groups(self,group):
         self.dlg.window(class_name_re='.*IconButton.*', found_index=3).wait('ready', timeout=15).click_input()
         time.sleep(1)
         for post in group:
