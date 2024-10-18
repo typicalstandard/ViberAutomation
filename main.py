@@ -14,6 +14,18 @@ class MainWindow(QtWidgets.QWidget, Ui_Input_Window):
 
             self.setupUi(self)
 
+            self.pushButton.clicked.connect(self.input_path)
+            self.combo_box.currentIndexChanged.connect(self.select_group)
+
+
+
+        def select_group(self):
+            return self.combo_box.checkedItems()
+
+
+        def input_path(self):
+            file, _ = QFileDialog.getOpenFileName(self, "Выберите файл", "", "Executable Files (*.exe)")
+            self.lineEdit.setText(file)
 
 
 
