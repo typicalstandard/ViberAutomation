@@ -7,9 +7,17 @@ import sys
 import py_win_keyboard_layout
 
 
-
+def reverse_transliterate(text):
+    reverse_mapping = {
+        'ф': 'a', 'и': 'b', 'с': 'c', 'в': 'd', 'у': 'e', 'а': 'f', 'п': 'g', 'р': 'h', 'ш': 'i', 'о': 'j',
+        'л': 'k', 'д': 'l', 'ь': 'm', 'т': 'n', 'щ': 'o', 'з': 'p', 'й': 'q', 'к': 'r', 'ы': 's', 'е': 't',
+        'г': 'u', 'м': 'v', 'ц': 'w', 'ч': 'x', 'н': 'y', 'я': 'z', 'х': '[', 'ъ': ']', 'ж': ';', 'э': "'",
+        'б': ',', 'ю': '.', '.': '/'
+    }
+    return ''.join(reverse_mapping.get(char, char) for char in text)
 class MainWindow(QtWidgets.QWidget, Ui_Input_Window):
         def __init__(self):
+            MAXIMUM_INPUT_LIMIT = 8
             super(MainWindow, self).__init__()
 
             self.setupUi(self)
@@ -36,6 +44,20 @@ class MainWindow(QtWidgets.QWidget, Ui_Input_Window):
         def input_path(self):
             file, _ = QFileDialog.getOpenFileName(self, "Выберите файл", "", "Executable Files (*.exe)")
             self.lineEdit.setText(file)
+
+        def ok_callback(self):
+            if not self.lineEdit.text():
+                QMessageBox.warning(self, "Ошибка", "Поле ввода пустое")
+                self.lineEdit.setStyleSheet('border: 2px solid red;')
+
+
+            elif not self.select_group():
+                QMessageBox.warning(self, "Ошибка", "Поле группы не должен быть пустыми")
+                self.combo_box.setStyleSheet('border: 2px solid red;')
+
+
+
+
 
 
 
