@@ -13,12 +13,22 @@ class MainWindow(QtWidgets.QWidget, Ui_Input_Window):
             super(MainWindow, self).__init__()
 
             self.setupUi(self)
+            self.initUI()
 
             self.pushButton.clicked.connect(self.input_path)
             self.combo_box.currentIndexChanged.connect(self.select_group)
 
+        def initUI(self):
+            self.combo_box = CheckableComboBox(self)
+            groups = ['Первая', 'Вторая']
 
+            for item in groups:
+                item = QStandardItem(item)
+                item.setCheckable(True)
+                self.combo_box.model().appendRow(item)
 
+            self.verticalLayout_2.addWidget(self.combo_box)
+            self.combo_box.setToolTip('Закрывать на esc')
         def select_group(self):
             return self.combo_box.checkedItems()
 
