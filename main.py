@@ -55,11 +55,26 @@ class MainWindow(QtWidgets.QWidget, Ui_Input_Window):
                 QMessageBox.warning(self, "Ошибка", "Поле группы не должен быть пустыми")
                 self.combo_box.setStyleSheet('border: 2px solid red;')
 
+            else:
 
+                # change the language to English
+                py_win_keyboard_layout.change_foreground_window_keyboard_layout(0x04090409)
 
+                # Translation for correct operation of pywinauto
+                all_groups = [reverse_transliterate(i.lower()) for i in self.select_group()]
 
+                chunks_groups = [all_groups[i:i + self.MAXIMUM_INPUT_LIMIT] for i in
+                                 range(0, len(all_groups), self.MAXIMUM_INPUT_LIMIT)]
 
+                viber_automation = ViberAutomation(self.lineEdit.text())
+                viber_automation.start_app()
+                viber_automation.open_notes()
+                viber_automation.maximize_window()
+                viber_automation.open_details()
 
+                for value in chunks_groups:
+                    viber_automation.select_element(self.spinBox.value())
+                    viber_automation.send_message_groups(value)
 
 
 
