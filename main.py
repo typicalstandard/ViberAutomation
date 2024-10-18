@@ -25,6 +25,8 @@ class MainWindow(QtWidgets.QWidget, Ui_Input_Window):
 
             self.pushButton.clicked.connect(self.input_path)
             self.combo_box.currentIndexChanged.connect(self.select_group)
+            self.buttonBox.accepted.connect(self.ok_callback)
+            self.buttonBox.rejected.connect(self.cancel_callback)
 
         def initUI(self):
             self.combo_box = CheckableComboBox(self)
@@ -75,6 +77,9 @@ class MainWindow(QtWidgets.QWidget, Ui_Input_Window):
                 for value in chunks_groups:
                     viber_automation.select_element(self.spinBox.value())
                     viber_automation.send_message_groups(value)
+
+        def cancel_callback(self):
+                self.hide()
 
 
 
