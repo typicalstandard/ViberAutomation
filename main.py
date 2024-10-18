@@ -15,11 +15,13 @@ def reverse_transliterate(text):
         'б': ',', 'ю': '.', '.': '/'
     }
     return ''.join(reverse_mapping.get(char, char) for char in text)
-class MainWindow(QtWidgets.QWidget, Ui_Input_Window):
-        def __init__(self):
-            MAXIMUM_INPUT_LIMIT = 8
-            super(MainWindow, self).__init__()
 
+
+class MainWindow(QtWidgets.QWidget, Ui_Input_Window):
+        MAX_INPUT_LIMIT = 8
+
+        def __init__(self):
+            super(MainWindow, self).__init__()
             self.setupUi(self)
             self.initUI()
 
@@ -39,6 +41,8 @@ class MainWindow(QtWidgets.QWidget, Ui_Input_Window):
 
             self.verticalLayout_2.addWidget(self.combo_box)
             self.combo_box.setToolTip('Закрывать на esc')
+
+
         def select_group(self):
             return self.combo_box.checkedItems()
 
@@ -58,7 +62,6 @@ class MainWindow(QtWidgets.QWidget, Ui_Input_Window):
                 self.combo_box.setStyleSheet('border: 2px solid red;')
 
             else:
-
                 # change the language to English
                 py_win_keyboard_layout.change_foreground_window_keyboard_layout(0x04090409)
 
