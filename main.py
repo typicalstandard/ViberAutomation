@@ -32,7 +32,7 @@ class MainWindow(QtWidgets.QWidget, Ui_Input_Window):
 
         def initUI(self):
             self.combo_box = CheckableComboBox(self)
-            groups = ['Первая', 'Вторая']
+            groups = [] #харкодить группы 
 
             for item in groups:
                 item = QStandardItem(item)
