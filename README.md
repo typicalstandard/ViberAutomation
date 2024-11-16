@@ -6,7 +6,7 @@
 git clone https://github.com/typicalstandard/ViberAutomation.git
 
 # Перейдите в директорию проекта
-cd ваш_репозиторий
+cd ViberAutomation
 
 # Установите зависимости
 pip install -r requirements.txt
